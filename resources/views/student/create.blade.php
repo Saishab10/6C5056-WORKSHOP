@@ -1,67 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Register Student</title>
-</head>
-<body>
 
-    <h1>Register New Student</h1>
+<x-layouts.app title="Create Student">
 
-    @if($errors->any())
-        <div>
-            <h3>Please fix the following errors:</h3>
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    <h1>Create Student</h1>
 
-    <form action="/students" method="POST">
+    <form action="{{ route('students.store') }}" method="POST">
         @csrf
 
-        <div>
-            <label>Name:</label>
-            <input type="text" name="name" value="{{ old('name') }}">
-        </div>
+        <x-students.form :student="new \App\Models\Student()" />
 
-        <br>
+        <button type="submit" class="btn">
+            Create Student
+        </button>
 
-        <div>
-            <label>Email:</label>
-            <input type="email" name="email" value="{{ old('email') }}">
-        </div>
-
-        <br>
-
-        <div>
-            <label>Phone:</label>
-            <input type="text" name="phone" value="{{ old('phone') }}">
-        </div>
-
-        <br>
-
-        <div>
-            <label>Address:</label>
-            <textarea name="address">{{ old('address') }}</textarea>
-        </div>
-
-        <br>
-
-        <div>
-            <label>Date of Birth:</label>
-            <input type="date" name="date_of_birth" value="{{ old('date_of_birth') }}">
-        </div>
-
-        <br>
-
-        <button type="submit">Register Student</button>
+        <a href="{{ route('students.index') }}">Cancel</a>
     </form>
 
-    <br>
-
-    <a href="/students">View All Students</a>
-
-</body>
-</html>
+</x-layouts.app>

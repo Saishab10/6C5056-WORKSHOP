@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Course Details</title>
-</head>
-<body>
+<x-layouts.app title="Course Details">
 
     <h1>Course Details</h1>
 
@@ -15,15 +10,20 @@
 
     <p><strong>Duration:</strong> {{ $course->duration_weeks }} weeks</p>
 
-    <p><strong>Fee:</strong> {{ $course->fee }}</p>
+    <p><strong>Fee:</strong> {{ number_format($course->fee, 2) }}</p>
 
     <p><strong>Difficulty:</strong> {{ $course->difficulty }}</p>
 
-    <p><strong>Status:</strong> {{ $course->is_active ? 'Active' : 'Inactive' }}</p>
+    <p><strong>Active:</strong>
+        {{ $course->is_active ? 'Yes' : 'No' }}
+    </p>
 
-    <br>
+    <a href="{{ route('courses.edit', $course) }}" class="btn">
+        Edit Course
+    </a>
 
-    <a href="/courses">Back to Courses</a>
+    <a href="{{ route('courses.index') }}">
+        Back to Courses
+    </a>
 
-</body>
-</html>
+</x-layouts.app>
